@@ -1,119 +1,66 @@
 import random
-from operator import index
+import hangman_words
+import hangman_art
 
-stages = [r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-word_list = ["aardvark", "baboon", "camel"]
+# TODO-1: - Update the word list to use the 'word_list' from hangman_words.py
 
-# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left.
-#  Set 'lives' to equal 6.
+lives = 6
 
-chosen_word = random.choice(word_list)
+# TODO-3: - Import the logo from hangman_art.py and print it at the start of the game.
+
+chosen_word = random.choice(hangman_words.word_list)
 print(chosen_word)
 
-placeholder = []
-correct_letters = []
-for position in chosen_word:
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
     placeholder += "_"
-    correct_letters += "_"
-
-placeholder_result = "".join(placeholder)
-correct_letters_result = "".join(correct_letters)
-print(placeholder_result)
+print(hangman_art.logo)
+print("Word to guess: " + placeholder)
 
 game_over = False
-lives = 6
-while not game_over and lives > 0:
+correct_letters = []
+
+while not game_over:
+
+    # TODO-6: - Update the code below to tell the user how many lives they have left.
+    print(f"****************************<???>/{lives} LIVES LEFT****************************")
     guess = input("Guess a letter: ").lower()
 
-    index = 0
+    # TODO-4: - If the user has entered a letter they've already guessed, print the letter and let them know.
+
+
     display = ""
+    if guess in correct_letters:
+        print(f"You already guessed this letter: {guess}. Please guess again.")
     for letter in chosen_word:
         if letter == guess:
-            correct_letters[index] = letter
             display += letter
-            index += 1
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
         else:
             display += "_"
-            index += 1
 
-    correct_letters_result = "".join(correct_letters)
-    print(correct_letters_result)
-    print(display)
+    print("Word to guess: " + display)
 
-    # TODO-2: - If guess is not a letter in the chosen_word, Then reduce 'lives' by 1.
-    #  If lives goes down to 0 then the game should stop and it should print "You lose."
+    # TODO-5: - If the letter is not in the chosen_word, print out the letter and let them know it's not in the word.
+    #  e.g. You guessed d, that's not in the word. You lose a life.
 
-    if lives == 0:
-        game_over = True
-        print(ascii_live)
-        print("You lost.")
-
-    elif correct_letters_result == chosen_word:
-        game_over = True
-        print("You win.")
-    elif display == placeholder_result:
+    if guess not in chosen_word:
         lives -= 1
+        print(f"The letter {guess} is not in the word. Please guess again.")
 
-    ascii_live = stages[lives]
-    print(ascii_live)
+        if lives == 0:
+            game_over = True
 
-    # TODO-3: - print the ASCII art from 'stages'
-    #  that corresponds to the current number of 'lives' the user has remaining.
+            # TODO 7: - Update the print statement below to give the user the correct word they were trying to guess.
+            print(f"***********************YOU LOSE**********************")
+            print(f"The word was: {chosen_word}")
 
+    if "_" not in display:
+        game_over = True
+        print("****************************YOU WIN****************************")
 
-
+    # TODO-2: - Update the code below to use the stages List from the file hangman_art.py
+    print(hangman_art.stages[lives])
