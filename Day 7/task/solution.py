@@ -1,4 +1,5 @@
 import random
+<<<<<<< HEAD
 
 from hangman_words import word_list
 from hangman_art import stages, logo
@@ -6,6 +7,67 @@ from hangman_art import stages, logo
 lives = 6
 
 print(logo)
+=======
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+word_list = ["aardvark", "baboon", "camel"]
+>>>>>>> bcafdda17d0c99f4688456720e1805602004abf8
+
+lives = 6
 
 chosen_word = random.choice(word_list)
 print(chosen_word)
@@ -49,8 +111,20 @@ while not game_over:
 
             print(f"***********************IT WAS {chosen_word}! YOU LOSE**********************")
 
+    if guess not in chosen_word:
+        lives -= 1
+        if lives == 0:
+            game_over = True
+            print("You lose.")
+
     if "_" not in display:
         game_over = True
+<<<<<<< HEAD
         print("****************************YOU WIN****************************")
 
     print(stages[lives])
+=======
+        print("You win.")
+
+    print(stages[lives])
+>>>>>>> bcafdda17d0c99f4688456720e1805602004abf8
