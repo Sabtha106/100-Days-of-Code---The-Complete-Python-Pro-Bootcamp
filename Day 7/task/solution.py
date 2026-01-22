@@ -1,7 +1,77 @@
 import random
+<<<<<<< HEAD
 
 from hangman_words import word_list
 from hangman_art import stages, logo
+=======
+<<<<<<< HEAD
+
+from hangman_words import word_list
+from hangman_art import stages, logo
+
+lives = 6
+
+print(logo)
+=======
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+word_list = ["aardvark", "baboon", "camel"]
+>>>>>>> bcafdda17d0c99f4688456720e1805602004abf8
+>>>>>>> a1192b920508e7a447a700dbdea950bafe88ce9a
 
 lives = 6
 
@@ -39,6 +109,18 @@ while not game_over:
             display += "_"
 
     print("Word to guess: " + display)
+<<<<<<< HEAD
+=======
+
+    if guess not in chosen_word:
+        lives -= 1
+        print(f"You guessed {guess}, that's not in the word. You lose a life.")
+
+        if lives == 0:
+            game_over = True
+
+            print(f"***********************IT WAS {chosen_word}! YOU LOSE**********************")
+>>>>>>> a1192b920508e7a447a700dbdea950bafe88ce9a
 
     if guess not in chosen_word:
         lives -= 1
@@ -51,6 +133,18 @@ while not game_over:
 
     if "_" not in display:
         game_over = True
+<<<<<<< HEAD
         print("****************************YOU WIN****************************")
 
     print(stages[lives])
+=======
+<<<<<<< HEAD
+        print("****************************YOU WIN****************************")
+
+    print(stages[lives])
+=======
+        print("You win.")
+
+    print(stages[lives])
+>>>>>>> bcafdda17d0c99f4688456720e1805602004abf8
+>>>>>>> a1192b920508e7a447a700dbdea950bafe88ce9a
