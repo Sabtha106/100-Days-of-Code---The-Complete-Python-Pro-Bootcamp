@@ -1,4 +1,5 @@
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z']
 
 direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
 text = input("Type your message:\n").lower()
@@ -6,12 +7,29 @@ shift = int(input("Type the shift number:\n"))
 
 
 # TODO-1: Create a function called 'encrypt()' that takes 'original_text' and 'shift_amount' as 2 inputs.
+def encrypt(text, shift):
+    # TODO-2: Inside the 'encrypt()' function, shift each letter of the 'original_text' forwards in the alphabet
+    #  by the shift amount and print the encrypted text.
+    encrypted_text = ''
+    alphabet_max_index = len(alphabet) - 1
+    for letter in text:
+        text_index = alphabet.index(letter)
+        encrypted_index = text_index + shift
 
-# TODO-2: Inside the 'encrypt()' function, shift each letter of the 'original_text' forwards in the alphabet
-#  by the shift amount and print the encrypted text.
+        # Accormadate last letters shift by shifiting the alphabet Z to the begging of the list.
+        # TODO-4: What happens if you try to shift z forwards by 9? Can you fix the code?
+        if encrypted_index > alphabet_max_index:
+            # do something
+            shift_diff = encrypted_index - alphabet_max_index
+            alphabet_b = alphabet[-1:] + alphabet[:-1]
+            encrypted_text += alphabet_b[shift_diff]
+        else:
+            encrypted_text += alphabet[encrypted_index]
 
-# TODO-4: What happens if you try to shift z forwards by 9? Can you fix the code?
+    print(f"Here is the encoded result: {encrypted_text}")
+
 
 # TODO-3: Call the 'encrypt()' function and pass in the user inputs. You should be able to test the code and encrypt a
 #  message.
 
+encrypt(text, shift)
