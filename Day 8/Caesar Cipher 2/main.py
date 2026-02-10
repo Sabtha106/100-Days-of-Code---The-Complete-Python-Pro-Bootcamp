@@ -13,41 +13,28 @@ shift = int(input("Type the shift number:\n"))
 
 def encrypt(text, shift):
     encrypted_text = ''
-    alphabet_max_index = len(alphabet) - 1
     for letter in text:
-        text_index = alphabet.index(letter)
-        encrypted_index = text_index + shift
-
-        #Accommodate last letters shift by shifting the alphabet Z to the begging of the list.
-        if encrypted_index > alphabet_max_index:
-            shift_diff = encrypted_index - alphabet_max_index
-            alphabet_b = alphabet[-1:] + alphabet[:-1]
-            encrypted_text += alphabet_b[shift_diff]
-        else:
-            encrypted_text += alphabet[encrypted_index]
+        shifted_position = alphabet.index(letter) + shift
+        shifted_position %= len(alphabet)
+        encrypted_text += alphabet[shifted_position]
 
     print(f"Here is the encoded result: {encrypted_text}")
 
 
 def decrypt(text, shift):
     decrypted_text = ''
-    alphabet_max_index = len(alphabet) - 1
     for letter in text:
-        text_index = alphabet.index(letter)
-        decrypted_index = text_index - shift
+        shifted_position = alphabet.index(letter) - shift
+        shifted_position %= len(alphabet)
+        decrypted_text += alphabet[shifted_position]
 
-        # Accommodate first letters shift by shifting the alphabet A to the end of the list.
-        if decrypted_index < 0:
-            shift_diff = decrypted_index + alphabet_max_index
-            alphabet_b = alphabet.remove(alphabet[0])
-            alphabet_b = alphabet.append(alphabet[0])
-            decrypted_text += alphabet_b[shift_diff]
-        else:
-            decrypted_text += alphabet[decrypted_index]
 
-    print(f"Here is the encoded result: {decrypted_text}")
+    print(f"Here is the decoded result: {decrypted_text}")
+
+
 decrypt(text, shift)
 encrypt(text, shift)
+
 
 
 
